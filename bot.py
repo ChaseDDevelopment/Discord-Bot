@@ -10,6 +10,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 SERVER = os.getenv('DISCORD_SERVER')
 
+
 bot = commands.Bot(command_prefix='!')
 client = discord.Client()
 
@@ -52,19 +53,29 @@ async def create_channel(ctx, channel_name):
         print(f'Creating a new channel: {channel_name}')
         await server.create_text_channel(channel_name)
 
-@bot.event
-async def on_message(message):
-    if message.author == client.user:
+
+
+
+@bot.listen('on_message')
+async def on_message_custom(message):
+    if message.author == bot.user:
         return
-
-    if message.content.lower() == 'bro':
-        await message.channel.send(f'{message.author} did you mean DudeManBroDawg?')
-
+    if 'bro' in message.content.lower():
+        await message.channel.send(f'{message.author} whats up DudeManBroDawg?!')
+    #
+    # if message.content.lower() == 'bro':
+    #     await message.channel.send(f'{message.author} did you mean DudeManBroDawg?')
+    if 'games' in message.content.lower():
+        await message.channel.send('')
+    elif message.content == 'raise-exception':
+        raise discord.DiscordException
 
     if 'happy birthday' in message.content.lower():
         await message.channel.send('Happy Birthday! :balloon::partying_face:')
     elif message.content == 'raise-exception':
         raise  discord.DiscordException
+
+   # await bot.process_commands(message)
 
 
 

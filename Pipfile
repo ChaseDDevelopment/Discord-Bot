@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 "discord.py" = "*"
 python-dotenv = "*"
+requests = "*"
+mysql-connector = "*"
+self = "*"
+steam = "*"
 
 [dev-packages]
 
